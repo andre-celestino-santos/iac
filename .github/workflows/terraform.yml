@@ -34,13 +34,6 @@ jobs:
         env:
          TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
          TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
-
-      - name: Terraform destroy
-        if: steps.terraform-import.outcome == 'failure'
-        run: terraform destroy -auto-approve
-        env:
-         TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
-         TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
  
       - name: Aplicar Terraform
         if: steps.terraform-import.outcome == 'failure'
