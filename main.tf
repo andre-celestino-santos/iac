@@ -30,6 +30,11 @@ resource "google_compute_instance" "web_server" {
   EOF
 
   tags = ["http-server"]
+
+  metadata = {
+    ssh-keys = var.ssh_public_key
+  }
+
 }
 
 resource "google_compute_firewall" "default-allow-http" {

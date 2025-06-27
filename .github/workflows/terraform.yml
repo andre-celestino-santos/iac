@@ -34,6 +34,7 @@ jobs:
         env:
          TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
          TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
+         TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
  
       - name: Aplicar Terraform
         if: steps.terraform-import.outcome == 'failure'
@@ -41,3 +42,4 @@ jobs:
         env:
          TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
          TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
+         TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
