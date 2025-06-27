@@ -29,9 +29,15 @@ jobs:
 
       - name: Terraform import
         run: ./terraform-import-resources.sh
+        env:
+         TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
+         TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
 
       - name: Terraform destroy
         run: terraform destroy -auto-approve
+        env:
+         TF_VAR_gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
+         TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
  
       - name: Aplicar Terraform (auto-approve)
         run: terraform apply -auto-approve
