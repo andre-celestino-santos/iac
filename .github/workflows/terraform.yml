@@ -2,7 +2,7 @@ name: Terraform GCP Deploy
 
 on:
   push:
-    branches: [main]  # Ou a branch que desejar
+    branches: [main]
 
 jobs:
   terraform:
@@ -27,6 +27,12 @@ jobs:
       - name: Validar Terraform
         run: terraform validate
 
+      - name: Terraform import
+        run: ./terraform-import-resources.sh
+
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
+ 
       - name: Aplicar Terraform (auto-approve)
         run: terraform apply -auto-approve
         env:
