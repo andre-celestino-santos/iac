@@ -1,0 +1,31 @@
+name: Terraform GCP Deploy
+
+on:
+  push:
+    branches: [main]  # Ou a branch que desejar
+
+jobs:
+  terraform:
+    name: Deploy com Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Autenticar na GCP com conta de serviço
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Inicializar Terraform
+        run: terraform init
+
+      - name: Validar Terraform
+        run: terraform validate
+
+      - name: Aplicar Terraform (auto-approve)
+        run: terraform apply -auto-approve
