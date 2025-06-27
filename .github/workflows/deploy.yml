@@ -1,9 +1,10 @@
 name: Deploy HTML com Ansible
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Terraform GCP Deploy"]
+    types:
+      - completed
 
 jobs:
   deploy:
