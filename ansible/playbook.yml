@@ -1,0 +1,15 @@
+- name: Atualizar HTML na VM
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Copiar novo HTML
+      copy:
+        src: templates/index.html
+        dest: /var/www/html/index.html
+        mode: '0644'
+
+    - name: Reiniciar nginx
+      service:
+        name: nginx
+        state: restarted

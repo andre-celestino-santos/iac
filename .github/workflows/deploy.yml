@@ -1,0 +1,24 @@
+name: Deploy HTML com Ansible
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Ansible
+        run: sudo apt-get update && sudo apt-get install -y ansible
+
+      - name: Rodar playbook
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ansible-playbook -i ansible/hosts ansible/playbook.yml
