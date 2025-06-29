@@ -1,0 +1,16 @@
+name: Ngnix stop
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  ngnix-stop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ngnix-stop
+        run: |
+         echo "Stopping nginx..."
+         echo "Stopped ngnix!"
